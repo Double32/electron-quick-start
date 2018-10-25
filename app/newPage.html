@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新窗口</title>
+</head>
+<body>
+
+新窗口
+<button type="button" onclick="btncli()">点击关闭当前窗口</button>
+
+</body>
+<script type="text/javascript">
+    const ipcRender = require('electron').ipcRenderer;
+
+    var button = document.createElement('button');
+    button.textContent = 'Hide';
+    function btncli() {
+        ipcRender.send('hide')
+    }
+
+</script>
+</html>

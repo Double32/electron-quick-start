@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!!!</title>
+  </head>
+  <body>
+    <h1>Hello World!!!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <input type="" name="" id="ipt" value="">
+    <button type="button" onclick="connectMain()">和主进程通信</button>
+
+
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js');
+    </script>
+    <script>window.$ = window.jQuery = require('./jquery-3.2.1.min.js');</script>
+    <script src="mainFn.js"></script>
+    <script>
+        const ipcRender = require('electron').ipcRenderer;
+        var ipt = document.getElementById('ipt');
+        function connectMain() {
+            ipcRender.send('getMsg', ipt.value)
+        }
+        ipcRender.on('ping', function(event, message){
+            console.log(message);
+        });
+    </script>
+  </body>
+</html>
